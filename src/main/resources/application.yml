@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: camunda user task demo
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jersey:
+    application-path: /camunda/rest/engine
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  web:
+    cors:
+      allowed-origins: "http://localhost:3000"
+      allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowed-headers: "*"
+      allow-credentials: true
+
+server:
+  port: 8084
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
+    min-response-size: 1024
+
+camunda:
+  bpm:
+    admin-user:
+      id: Admin
+      password: admin
+      first-name: Admin account
+    database:
+      schema-update: true
+      type: h2
+    default-serialization-format: application/json
+    generic-properties:
+      properties:
+        deploy-changed-only: true # If true, only resources that have changed become part of the deployment.
+    history-level: FULL
+    eventing:
+      execution: true
+      history: false
+      task: false
+    webapp:
+      index-redirect-enabled: true
